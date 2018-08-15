@@ -44,6 +44,7 @@ Example files are provided that show how these stages typically work.
 Users are encouraged to report any bugs using the Github Issue Tracker which can be found <a href="https://github.com/TASBE/TASBEFlowAnalytics/issues">here</a>.
 
 <font size="9"><b>TASBE Flow Analytics Excel Interface</b></font>
+<br>
 [![Alt text for your video](https://img.youtube.com/vi/EMQJlTAzuDU/0.jpg)](https://www.youtube.com/watch?v=EMQJlTAzuDU)
 
 
