@@ -5,17 +5,17 @@ TASBE Flow Analytics package provides a user friendly, open-source environment t
 
 
 <div class="container">
-   <img src="https://github.com/mehersam/TASBEFlowAnalytics/blob/gh-pages/docs/resources/color_compensation.png?raw=true" height="200" width="185" />
+   <img src="https://github.com/TASBE/TASBE/blob/master/docs/resources/color_compensation.png?raw=true" height="200" width="185" />
 
- <img src="https://github.com/mehersam/TASBEFlowAnalytics/blob/gh-pages/docs/resources/color_translation.png?raw=true"  height="200" width="185" />
+ <img src="https://github.com/TASBE/TASBE/blob/master/docs/resources/color_translation.png?raw=true"  height="200" width="185" />
 
-  <img src="https://github.com/mehersam/TASBEFlowAnalytics/blob/gh-pages/docs/resources/AutomaticGate.png?raw=true" height="200" width="185" />
+  <img src="https://github.com/TASBE/TASBE/blob/master/docs/resources/AutomaticGate.png?raw=true" height="200" width="185" />
 </div>
 
 <font size="9"><b>INSTALLATION</b></font>
 
  This project is intended to be run using either Matlab or Octave. A getting started document
-to guide users through installation can be found <a href="https://github.com/mehersam/TASBEFlowAnalytics/blob/gh-pages/docs/GettingStarted/tasbe-getting-started-tutorial.pdf">here</a>. 
+to guide users through installation can be found <a href="https://github.com/TASBE/TASBE/blob/master/docs/GettingStarted/tasbe-getting-started-tutorial.pdf">here</a>. 
 
 <font size="9"><b>WORKFLOW</b></font>
 
@@ -33,11 +33,11 @@ Example files are provided that show how these stages typically work.
 
   We have provided detailed tutorials in order to help users easily use the TASBE package 
   
-  * <a href="https://github.com/mehersam/TASBEFlowAnalytics/blob/gh-pages/docs/GettingStarted/tasbe-getting-started-tutorial.pdf">Getting Started </a> 
-  * <a href="https://github.com/mehersam/TASBEFlowAnalytics/tree/gh-pages/docs/FlowCytometryDocumentation"> What is Flow Cytometry? </a> 
-  * <a href="https://github.com/mehersam/TASBEFlowAnalytics/tree/gh-pages/docs/ColorModelTutorial/tasbe-color-model.pdf"> Creating and Understanding a Color Model </a> 
-  * <a href="https://github.com/mehersam/TASBEFlowAnalytics/tree/gh-pages/docs/BatchAnalysisTutorial/tasbe-batch-analysis-tutorial.pdf"> Performing a Batch Analysis </a> 
-  * <a href="https://github.com/mehersam/TASBEFlowAnalytics/tree/gh-pages/docs/Example%20Files"> Example Files </a>
+  * <a href="https://github.com/TASBE/TASBE/blob/master/docs/GettingStarted/tasbe-getting-started-tutorial.pdf">Getting Started </a> 
+  * <a href="https://github.com/TASBE/TASBE/tree/master/docs/FlowCytometryDocumentation"> What is Flow Cytometry? </a> 
+  * <a href="https://github.com/TASBE/TASBE/blob/master/docs/ColorModelTutorial/tasbe-color-model.pdf"> Creating and Understanding a Color Model </a> 
+  * <a href="https://github.com/TASBE/TASBE/blob/master/docs/BatchAnalysisTutorial/tasbe-batch-analysis-tutorial.pdf"> Performing a Batch Analysis </a> 
+  * <a href="https://github.com/TASBE/TASBE/tree/master/docs/Example%20Files"> Example Files </a>
 
 <font size="9"><b>Problems? Bugs?</b></font>
 
