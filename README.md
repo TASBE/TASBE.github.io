@@ -1,50 +1,34 @@
+# Installation
+
+ This project is intended to be run using either Matlab or Octave. More information regarding the installation process can be found [here](docs/installation.md).
  
-<font size="5">
-TASBE Flow Analytics package provides a user friendly, open-source environment to visually represent and analyze flow cytometry data.</font> 
-
-
-
-<div class="container">
-   <img src="https://github.com/TASBE/TASBE/blob/master/docs/resources/color_compensation.png?raw=true" height="200" width="185" />
-
- <img src="https://github.com/TASBE/TASBE/blob/master/docs/resources/color_translation.png?raw=true"  height="200" width="185" />
-
-  <img src="https://github.com/TASBE/TASBE/blob/master/docs/resources/AutomaticGate.png?raw=true" height="200" width="185" />
-</div>
-
-<font size="9"><b>INSTALLATION</b></font>
-
- This project is intended to be run using either Matlab or Octave. A getting started document
-to guide users through installation can be found <a href="https://github.com/TASBE/TASBE/blob/master/docs/GettingStarted/tasbe-getting-started-tutorial.pdf">here</a>. 
-
-<font size="9"><b>WORKFLOW</b></font>
+# Workflow
 
  The recommended workflow for using the TASBE package is to process your data in three stages: 
  
- 
-   a.) Creation of a ColorModel which translates raw FCS data to comparable unit data. <br /> 
-   b.) Using the created ColorModel for batch processing of experimental data. <br /> 
-   c.) Comparison and Plotting of the results of a batch analysis.  
+   1. Creation of a ColorModel which translates raw FCS data to comparable unit data. <br /> 
+   2. Using the created ColorModel for batch processing of experimental data. <br /> 
+   3. Comparison and plotting of the results from analysis.  
  
 Example files are provided that show how these stages typically work.
-   
 
-<font size="9"><b>DOCUMENTATION</b></font>
+## Excel Interface
+The workflow described above has been consolidated into a new Excel interface feature that provides a user-friendly bridge between raw FCS data and current TASBE data analysis tools. Users can document important aspects of their experiments without having to worry about writing Matlab code. More information can be found [here](docs/Excel_README.md).   
+
+### Demo Video 
+[![Alt text for your video](https://img.youtube.com/vi/EMQJlTAzuDU/0.jpg)](https://www.youtube.com/watch?v=EMQJlTAzuDU)
+   
+# Tutorials
 
   We have provided detailed tutorials in order to help users easily use the TASBE package 
   
-  * <a href="https://github.com/TASBE/TASBE/blob/master/docs/GettingStarted/tasbe-getting-started-tutorial.pdf">Getting Started </a> 
-  * <a href="https://github.com/TASBE/TASBE/tree/master/docs/FlowCytometryDocumentation"> What is Flow Cytometry? </a> 
-  * <a href="https://github.com/TASBE/TASBE/blob/master/docs/ColorModelTutorial/tasbe-color-model.pdf"> Creating and Understanding a Color Model </a> 
-  * <a href="https://github.com/TASBE/TASBE/blob/master/docs/BatchAnalysisTutorial/tasbe-batch-analysis-tutorial.pdf"> Performing a Batch Analysis </a> 
+  * <a href="docs/installation.md">Getting Started </a> 
+  * <a href="https://github.com/TASBE/TASBE/tree/master/docs/FlowCytometryDocumentation"> Introduction to Flow Cytometry </a> 
+  * <a href="docs/ColorModelTutorial/tasbe-color-model.pdf"> Creating a ColorModel </a> 
+  * <a href="docs/BatchAnalysisTutorial/tasbe-batch-analysis-tutorial.pdf"> Running Analysis </a> 
   * <a href="https://github.com/TASBE/TASBE/tree/master/docs/Example%20Files"> Example Files </a>
 
-<font size="9"><b>Problems? Bugs?</b></font>
+# Additional Resources
+* [TASBE Codebase](https://github.com/TASBE)
 
 Users are encouraged to report any bugs using the Github Issue Tracker which can be found <a href="https://github.com/TASBE/TASBEFlowAnalytics/issues">here</a>.
-
-<font size="9"><b>TASBE Flow Analytics Excel Interface</b></font>
-<br>
-[![Alt text for your video](https://img.youtube.com/vi/EMQJlTAzuDU/0.jpg)](https://www.youtube.com/watch?v=EMQJlTAzuDU)
-
-

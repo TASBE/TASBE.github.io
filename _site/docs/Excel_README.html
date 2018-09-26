@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+
+    
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>TASBEFlowAnalytics Excel Interface User Guide | tasbe.github.io</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="TASBEFlowAnalytics Excel Interface User Guide" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/Excel_README.html" />
+<meta property="og:url" content="http://localhost:4000/docs/Excel_README.html" />
+<meta property="og:site_name" content="tasbe.github.io" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/docs/Excel_README.html","headline":"TASBEFlowAnalytics Excel Interface User Guide","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=15876064cc0bfe2a984717e349a50bbda2ce1c43">
+  </head>
+  <body>
+    <header class="page-header" role="banner">
+      <h1 class="project-name"><a href = "http://localhost:4000" style="text-decoration: none; color : white;"> TASBEFlowAnalytics</a></h1>
+      <h2 class="project-tagline">A user friendly & open-source environment that visually represents and analyzes flow cytometry data</h2>
+      
+        <a href="https://github.com/TASBE/TASBEFlowAnalytics" class="btn">View on GitHub</a>
+      
+      
+    </header>
+	
+    <main id="content" class="main-content" role="main">
+      <h1 id="tasbeflowanalytics-excel-interface-user-guide">TASBEFlowAnalytics Excel Interface User Guide</h1>
+
+<p>A new feature of the TASBE Flow Analytics package is an Excel interface that provides a user-friendly interface between raw FCS data and current TASBE data analysis tools. Using a template spreadsheet, scientists can document important aspects of their experiments without having to worry about writing Matlab code. Currently, the template is organized into the following sheets:</p>
+<ul>
+  <li>“Experiment”: includes all of the general experiment information and filename templates</li>
+  <li>“Samples”: includes important information regarding samples and batch analysis</li>
+  <li>“Calibration”: includes information to generate a Color Model</li>
+  <li>“Comparative Analysis”: includes information to run plusminus analysis</li>
+  <li>“Transfer Curve Analysis”: includes information to run transfer curve analysis</li>
+  <li>“Optional Settings”: TASBEConfig preferences that should not be changed unless absolutely necessary</li>
+  <li>“96w, 48w, 24w”: Plate layouts labeled with sample names used for better visualization</li>
+</ul>
+
+<p><strong>Note</strong>: All file paths are relative to the location of the spreadsheet template unless they are absolute paths.</p>
+
+<h2 id="user-instructions">User Instructions</h2>
+<p>An example of the template is located at <a href="https://github.com/TASBE/TASBEFlowAnalytics-Tutorial">TASBEFlowAnalytics-Tutorial</a> titled <code class="highlighter-rouge">batch_template.xlsm</code>. This example spreadsheet uses the tutorial
+FCS data. The code needed to run the template is in the newest release of <a href="https://github.com/TASBE/TASBEFlowAnalytics/releases">TASBEFlowAnalytics</a>. The following sections describe specific features for each template sheet. There are more notes highlighted in green throughout the spreadsheet.</p>
+
+<h3 id="experiment">Experiment</h3>
+<ul>
+  <li>Filename templates are used to generate the correct FCS filenames without having to type all of them out. Each filename template is separated into numbered sections with some sections being static and some being variable. The variable sections must correspond to column names in “Samples”. 
+(i.e. A template of 1_2_3.fcs would have the numbers replaced with the three correct inputs.) <strong>Make sure to update the blueprint of number placeholders right below the Filename Template header.</strong></li>
+  <li>The conditions keys are used to make sure that the values for a certain column name in “Samples” is valid. The keys are used to obtain the sets for plusminus and transfer curve analysis.</li>
+</ul>
+
+<h3 id="samples">Samples</h3>
+<ul>
+  <li>The SAMPLE NAME column is necessary for the analysis and needs to be manually filled out.</li>
+  <li>Information for each replicate should be in the same row with commas separating the values (i.e. sample locations for three replicates could look like A1, A2, A3). This feature is not applicable to the experimental condition columns.</li>
+  <li>The “Click to Update Filenames” button serves to generate sample filenames using the filename templates. These filenames are used in the TASBE <code class="highlighter-rouge">getExcelFilename</code> function, so it is important to click the “Update Filenames” button before running any analysis.</li>
+  <li>“Statistics Filename”, “Statistics Filepath”, “Point Cloud Filename”, and “Point Cloud Filepath” are preferences for batch analysis. “Point Cloud Filename” takes in a filename template number instead of a string name since Point Cloud files are generated for multiple samples.</li>
+  <li>The “Click to Update Plates” button fills out the plate layout sheets. Values for the plate layout column should consist of the plate sheet name followed by the plate name (i.e. 96w,Plate 1). It is also important for the SAMPLE LOCATION(s) column to be updated since it is used to determine where to put the sample names.</li>
+</ul>
+
+<h3 id="calibration">Calibration</h3>
+<ul>
+  <li>Multiple bead files can be compared by listing out their sample names in the “Sample Name” cell within the “Rainbow Beads” section. (i.e. Beads,Beads2,Beads3). The “Bead Comparison Tolerance” determines how identical you want the bead files to be. The results of the comparisons will be included in the TASBESession log located at the bottom of the sheet.</li>
+  <li>The “Constitutive/Input/Output” cells within the “Fluorochromes” section are optional for batch analysis but required for plusminus and transfer curve analysis. If this feature will be used, exactly one channel must be marked as Constitutive. The minimum is 2 colors with the second color acting as both the input and output. (It only needs to be labeled as one of the two.) For 3 or more colors, all pairwise combinations between labeled inputs and outputs will be analyzed. Colors not labeled will be ignored.</li>
+  <li>The “Relevant Channels” cell within the “Color Translation” section determines which colors to consider when creating the Color Model. A value of “all” means all listed colors will be used.</li>
+</ul>
+
+<h3 id="comparative-analysis">Comparative Analysis</h3>
+<ul>
+  <li>“Comparison Group(s)” contains sample column name-value pairs that determine which samples in the “Samples” sheet are compared. The format is “Sample Column Name = Value”. Multiple name-value pairs can be listed out to further specify the comparison groups (i.e.  ColName1 = Value1, ColName2 = Value2). Leave this section blank if all samples should be considered for analysis.</li>
+  <li>“Comparisons” consist of the required primary comparison sets (i.e. +, -) and the secondary ordering inductions, which are optional. Both the primary and secondary sets are in the form of sample column names for a single plusminus analysis.</li>
+  <li>Multiple plusminus analysis can be run as long as the Comparison Groups are aligned with their respective Comparison values. Additional preferences including output filename and plot path are required to differentiate between different analyses.</li>
+  <li>The stem and device name cells were removed and replaced by automatically generated condition names in the format of “sample column name = value” for each Comparison Group.</li>
+</ul>
+
+<h3 id="transfer-curve-analysis">Transfer Curve Analysis</h3>
+<ul>
+  <li>“Comparison Group(s)” contains sample column name-value pairs that determine which samples in the “Samples” sheet are analyzed. Each pair should correspond to a value in “Comparisons”. The format for Comparison Groups is “Sample Column Name = Value”. Multiple name-value pairs can be listed out to further specify the comparison groups (i.e.  ColName1 = Value1, ColName2 = Value2). Leave this section blank if all samples should be considered for analysis.</li>
+  <li>“Comparisons” consists of the sample column name with the transfer curve conditions. It is important for the values to be numerical. Additional preferences including stem name and plot path are required to differentiate between different analyses.</li>
+  <li>Device name cells were removed. The defaults for stem names are in the format of “column name = value” for each Comparison Group, or they are the experiment name.</li>
+</ul>
+
+<h3 id="optional-settings">Optional Settings</h3>
+<ul>
+  <li>To change a preference, input the new value within the Value column.</li>
+  <li>MEFL-converted point clouds can be obtained by setting the value of the “flow.outputPointCloud” preference to 1.</li>
+  <li>Outputted Histogram and Statistic CSV files from batch analysis can be controlled with the “flow.outputHistogramFile” and “flow.outputStatisticsFile” preferences.</li>
+</ul>
+
+<h3 id="next-steps">Next Steps</h3>
+<p><strong>Before running TASBE Flow Analytics, make sure you have installed TASBE and are not just running it from the directory. Installation instructions are can be found <a href="/docs/installation.html">here</a>.</strong></p>
+
+<p>After completing and saving the template spreadsheet, the actual analysis can be run in two ways:</p>
+<ol>
+  <li>Run the function <code class="highlighter-rouge">analyzeFromExcel</code> (located in the code directory of TASBEFlowAnalytics) from MATLAB
+with the file path of the spreadsheet as the input and the type (‘colormodel’, ‘batch’, ‘plusminus’, or ‘transfercurve’). <code class="highlighter-rouge">analyzeFromExcel</code> will then create a TemplateExtraction object and run the correct analysis. <strong>Don’t forget to click the “Update Filenames” button before running any analysis.</strong></li>
+  <li>Click the run buttons located in each sheet of the template. From there, <code class="highlighter-rouge">analyzeFromExcel</code> is automatically called with the correct inputs. The TASBESession log would then be outputted near the bottom of the relevant sheet in the form of a progress bar. The template contains some more detailed instructions on how to set up the buttons. There are also cancel buttons for each analysis. Cooperative multitasking is implemented to allow users to continue modifying the template while an analysis is running. <strong>This feature currently only works with Windows.</strong></li>
+</ol>
+
+<p><strong>Note</strong>: The code is based on the coordinates of several important variables. You can adjust those coordinates accordingly using the <code class="highlighter-rouge">setExcelCoordinates</code> function within the <code class="highlighter-rouge">TemplateExtraction</code> class.</p>
+
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>
