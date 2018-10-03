@@ -24,8 +24,8 @@ The workflow described above has been consolidated into a new Excel interface fe
   
   * <a href="docs/installation.md">Getting Started </a> 
   * <a href="https://github.com/TASBE/TASBE/tree/master/docs/FlowCytometryDocumentation"> Introduction to Flow Cytometry </a> 
-  * <a href="docs/ColorModelTutorial/tasbe-color-model.pdf"> Creating a ColorModel </a> 
-  * <a href="docs/BatchAnalysisTutorial/tasbe-batch-analysis-tutorial.pdf"> Running Analysis </a> 
+  * [Creating a ColorModel](docs/color_model.md)
+  * [Running Analysis](docs/analysis.md) 
   * <a href="https://github.com/TASBE/TASBE/tree/master/docs/Example%20Files"> Example Files </a>
 
 # Additional Resources

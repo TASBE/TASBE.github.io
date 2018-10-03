@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+
+    
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>ColorModels | tasbe.github.io</title>
+<meta name="generator" content="Jekyll v3.7.4" />
+<meta property="og:title" content="ColorModels" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/color_model.html" />
+<meta property="og:url" content="http://localhost:4000/docs/color_model.html" />
+<meta property="og:site_name" content="tasbe.github.io" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/docs/color_model.html","headline":"ColorModels","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=4baed8066d425a3145f6430afcb999f7be60bc3c">
+  </head>
+  <body>
+    <header class="page-header" role="banner">
+      <h1 class="project-name"><a href = "https://tasbe.github.io/TASBE/" style="text-decoration: none; color : white;"> TASBEFlowAnalytics</a></h1>
+      <h2 class="project-tagline">A user friendly & open-source environment that visually represents and analyzes flow cytometry data</h2>
+      
+        <a href="https://github.com/TASBE/TASBEFlowAnalytics" class="btn">View on GitHub</a>
+      
+      
+    </header>
+	
+    <main id="content" class="main-content" role="main">
+      <h1 id="colormodels">ColorModels</h1>
+
+<p>This tutorial explains the process of building a ColorModel using the TASBEFlowAnalytics software package. A ColorModel improves the precision of flow cytometry measurements by translating raw fcs data into comparable unit data.</p>
+
+<p>ColorModels can be created either with the <a href="docs/Excel_README.md">Excel Interface</a> or with the <code class="highlighter-rouge">make_color_model.m</code> <a href="https://github.com/TASBE/TASBEFlowAnalytics-Tutorial/blob/master/template_colormodel/make_color_model.m">MATLAB script</a>.</p>
+
+<h2 id="autogating">Autogating</h2>
+<p>The following code segment initializes Autogating.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AGP = AutogateParameters();
+AGP.k_components = 2;
+AGP.channel_names = {’FSC-A’, ’SSC-A’};
+autogate = autodetect_gating(blankfile,AGP,’plots’);
+</code></pre></div></div>
+<p>Line 1 involves initializing the autogating filters. Line 2 corresponds to the number of searched Gaussian components. The default is 2 (first component is a single-cell component, while the second component is a non-cell/ clump component). The default channel names are FSCA,SSCA,FSCH,FSCW,SSCH,SSCW. Once the parameters are set, Autogating is initialized in line 4. Inputs include the location of the blankfile, the parameters, and the output directory where graphical figures will be stored.</p>
+
+<h2 id="channels-and-colorpairs">Channels and ColorPairs</h2>
+<p>A useful function of the TASBEFlowAnalytics package is its use of multi-color controls to convert other colors into MEFL units. In order to begin this process, channels are created for each color being measured.</p>
+
+<p>An example of this is below.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>channels = {}; colorfiles = {};
+
+channels{1} = Channel(’FITC-A’, 488, 515, 20);
+colorfiles{1} = [stem0312 ’EYFP_P3.fcs’];
+channels{1} = setPrintName(channels{1}, ’EYFP’);
+channels{1} = setLineSpec(channels{1}, ’y’);
+
+channels{2} = Channel(’PE-Tx-Red-YG-A’, 561, 610, 20);
+colorfiles{2} = [stem0312 ’mkate_P3.fcs’];
+channels{2} = setPrintName(channels{2}, ’mKate’);
+channels{2} = setLineSpec(channels{2}, ’r’);
+
+channels{3} = Channel(’Pacific Blue-A’, 405, 450, 50);
+colorfiles{3} = [stem0312 ’ebfp2_P3.fcs’];
+channels{3} = setPrintName(channels{3}, ’EBFP2’);
+channels{3} = setLineSpec(channels{3}, ’b’);
+</code></pre></div></div>
+<p>As shown above, there are three channels being created, FITC-A, PE-Tx-Red-YG-A, and Pacific Blue-A. Each channel requires a name, wavelength, center filter, and width filter. Additional functions exist to add details by which a channel can be identified. For example, <code class="highlighter-rouge">setPrintName</code> and <code class="highlighter-rouge">setLineSpec</code> are used to set the channel names and colors.</p>
+
+<p>After creating the channels, colorpairfiles are constructed to specify which colors are being converted.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colorpairfiles = {};
+
+colorpairfiles{1} = {channels{1}, channels{2}, channels{3}, [stem0312 ’ mkate_EBFP2_EYFP_P3.fcs’]};
+colorpairfiles{2} = {channels{1}, channels{3}, channels{2}, [stem0312 ’ mkate_EBFP2_EYFP_P3.fcs’]};
+</code></pre></div></div>
+<p>Line 3 shows an example of creating a color pairing. The first two parameters are the colors (FITC-A and PE-Tx-Red-YG-A) which are being converted into one another. The third parameter is an alternate color (Pacific Blue-A), which is used to estimate the conversion.</p>
+
+<h2 id="creating-the-colormodel">Creating the ColorModel</h2>
+<p>Once the necessary inputs have been created, the ColorModel can be executed and saved.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CM = ColorModel(beadfile, blankfile, channels, colorfiles, colorpairfiles);
+CM=resolve(CM, settings);
+save(’-V7’,’CM120312.mat’,’CM’);
+</code></pre></div></div>
+<p>More details regarding the beads can be specified with the functions, <code class="highlighter-rouge">set_bead_model</code>, <code class="highlighter-rouge">set_bead_batch</code>, and <code class="highlighter-rouge">set_bead_peak_threshold</code>.</p>
+
+<h2 id="output-graphs">Output Graphs</h2>
+<p>After running the model, a series of graphs will be saved in a plots directory located in the same location as the Excel Interface or Matlab script.</p>
+
+<p><img src="/docs/ColorModelTutorial/tasbe_color_model_tutorial_src/figures/AutomaticGate-FSC-A-vs-SSC-A.png" alt="alt-text" /></p>
+
+<p><strong>Autogating graph</strong>: visualization of the side scatter vs. the forward scatter. Two main components searched include a main cluster of cells and a non-cells cluster. Component 1 points towards the cell cluster, while component 2 corresponds to debris identified as the non-cell component.</p>
+
+<p><img src="/docs/ColorModelTutorial/tasbe_color_model_tutorial_src/figures/autofluorescence-mKate.png" alt="alt-text" /></p>
+
+<p><strong>Autofluorescence graph for PE-Tx-Red-YG-A channel</strong>: a bell curve with a maximum at around 0 is expected. If a majority of the curve exists below 0, then it could be due to high autofluorescence within the cells. Alternatively, a widespread curve could imply instrument error.</p>
+
+<p><img src="/docs/ColorModelTutorial/tasbe_color_model_tutorial_src/figures/bead-calibration.png" alt="alt-text" /></p>
+
+<p><strong>Bead peak identification graphs</strong>: created for each channel.</p>
+
+<p><img src="/docs/ColorModelTutorial/tasbe_color_model_tutorial_src/figures/bead-fit-curve.png" alt="alt-text" /></p>
+
+<p><strong>Bead fit curve</strong>: if observed points do align with the constrained fit, then bead peaks may not have been accurately identified.</p>
+
+<p><img src="/docs/ColorModelTutorial/tasbe_color_model_tutorial_src/figures/color-compensation-mKate-for-EYFP.png" alt="alt-text" /></p>
+
+<p><img src="/docs/ColorModelTutorial/tasbe_color_model_tutorial_src/figures/color-translation-mKate-to-EYFP.png" alt="alt-text" /></p>
+
+<p><strong>Compensation and translation graphs</strong>: denote the rate of separation from one color to another.</p>
+
+<h4 id="if-any-issues-are-encountered-during-the-installation-process-report-them-using-the-github-issue-tracker">If any issues are encountered during the installation process, report them using the <a href="https://github.com/TASBE/TASBEFlowAnalytics/issues">Github Issue Tracker</a>.</h4>
+
+
+      <footer class="site-footer">
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>
