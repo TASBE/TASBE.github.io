@@ -31,4 +31,11 @@ The workflow described above has been consolidated into a new Excel interface fe
 # Additional Resources
 * [TASBE Codebase](https://github.com/TASBE)
 
+# Citation
+**If you make use of the TASBE Flow Analytics package, please cite
+the following publication:**
+
+* Jacob Beal, Cassandra Overney, Aaron Adler, Fusun Yaman, Lisa Tiberio, and Meher Samineni. "TASBE Flow Analytics: A Package for Calibrated Flow Cytometry Analysis," ACS Synthetic Biology, 8(7), pp 1524--1529, May 2019
+
+
 Users are encouraged to report any bugs using the Github Issue Tracker which can be found <a href="https://github.com/TASBE/TASBEFlowAnalytics/issues">here</a>.
