@@ -20,13 +20,14 @@ The workflow described above has been consolidated into a new Excel interface fe
    
 # Tutorials
 
-  We have provided detailed tutorials in order to help users easily use the TASBE package 
-   
+  We have provided a collection of tutorials and examples in order to help users more easily use the TASBE package:
+  
   * [Getting Started](docs/installation.md)
   * <a href="https://github.com/TASBE/TASBE/tree/master/docs/FlowCytometryDocumentation"> Introduction to Flow Cytometry </a> (not web formatted) 
   * [Creating a ColorModel](docs/color_model.md)
   * [Running Analysis](docs/analysis.md) 
   * <a href="https://github.com/TASBE/TASBE/tree/master/docs/Example%20Files"> Example Files </a>
+  * <a href="https://github.com/TASBE/TASBEFlowAnalytics-Tutorial">Repository of tutorials, templates and example files</a>
 
 # Additional Resources
 * [TASBE Codebase](https://github.com/TASBE)
